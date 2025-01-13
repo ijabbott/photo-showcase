@@ -10,4 +10,13 @@ export default defineConfig({
     setupFiles: ['./vitest-setup.ts'],
     globals: true,
   },
+  server: {
+    proxy: {
+      '/photoApi': {
+        target: 'https://showcase.leantechniques.com',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/photoApi/, ''),
+      }
+    }
+  }
 })
