@@ -20,7 +20,16 @@ function PhotoShowcase() {
     <>
       <h1>Photo Showcase</h1>
       <h2>Albums</h2>
-      {albums.map(album => <h3 key={album.albumId}>{`Album ${album.albumId}`}</h3>)}
+      {albums.map(album => 
+        <h3 key={album.albumId}>
+          {`Album ${album.albumId}`}
+          {/* {album.photos.map(photo => 
+            <h4>
+              {`${photo.title}`}
+            </h4>
+          )} */}
+        </h3>
+      )}
     </>
   )
 }

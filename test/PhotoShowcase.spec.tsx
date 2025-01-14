@@ -1,13 +1,13 @@
-import {act, render, screen, waitFor} from '@testing-library/react'
+import {render, screen, waitFor, within} from '@testing-library/react'
 import PhotoShowcase from '../src/PhotoShowcase'
 import {describe, test, expect} from 'vitest'
 import {http, HttpResponse} from 'msw'
 import {setupServer} from 'msw/node'
-
+import { mockSuccessfulResponse } from './mocks/mockApiResponses'
 
 const server = setupServer(
     http.get('photoApi/albums', () => {
-        return HttpResponse.json([{"albumId": 2}, {"albumId": 3}, {"albumId": 1}, {"albumId": 4}])
+        return HttpResponse.json(mockSuccessfulResponse)
     })
 )
 
@@ -19,7 +19,6 @@ describe('PhotoShowcase', () => {
     test('PhotoShowcase displays Photo Showcase heading text', async () => {
         render(<PhotoShowcase/>)
 
-        // TODO: is there a way to not need waitFor here? currently used to avoid "An update to PhotoShowcase inside a test was not wrapped in act" error due to PhotoShowcase updating with albums response
         await waitFor(() => {
             expect(screen.getByRole('heading', {name: 'Photo Showcase'})).toHaveTextContent('Photo Showcase')
         })
@@ -42,5 +41,23 @@ describe('PhotoShowcase', () => {
             expect(await screen.findByRole('heading', {name: 'Album 3'})).toHaveTextContent('Album 3')
             expect(await screen.findByRole('heading', {name: 'Album 4'})).toHaveTextContent('Album 4')
         })
+
+        // test('PhotoShowcase displays Photo Titles under each Album Title', async () => {
+        //     render(<PhotoShowcase/>)
+
+        //     const album1Element = await screen.findByRole('heading', {name: 'Album 1'})
+        //     const album4Element = await screen.findByRole('heading', {name: 'Album 4'})
+
+
+        //     const photo5 = within(album1Element).getByRole('heading', {name: 'Photo5Album1'})
+        //     const photo6 = within(album4Element).getByRole('heading', {name: 'Photo6Album4'})
+        //     const photo7 = within(album4Element).getByRole('heading', {name: 'Photo7Album4'})
+        //     const photo8 = within(album4Element).getByRole('heading', {name: 'Photo8Album4'})
+
+        //     expect(photo5).toHaveTextContent('Photo5Album1')
+        //     expect(photo6).toHaveTextContent('Photo6Album4')
+        //     expect(photo7).toHaveTextContent('Photo7Album4')
+        //     expect(photo8).toHaveTextContent('Photo8Album4')
+        // })
     })
 })
