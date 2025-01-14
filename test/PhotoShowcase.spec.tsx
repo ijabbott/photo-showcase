@@ -1,4 +1,4 @@
-import {render, screen, waitFor} from '@testing-library/react'
+import {act, render, screen, waitFor} from '@testing-library/react'
 import PhotoShowcase from '../src/PhotoShowcase'
 import {describe, test, expect} from 'vitest'
 import {http, HttpResponse} from 'msw'
@@ -16,22 +16,27 @@ afterEach(() => server.resetHandlers())
 afterAll(() => server.close())
 
 describe('PhotoShowcase', () => {
-    test('PhotoShowcase displays Photo Showcase heading text', () => {
+    test('PhotoShowcase displays Photo Showcase heading text', async () => {
         render(<PhotoShowcase/>)
 
-        expect(screen.getByRole('heading', {name: 'Photo Showcase'})).toHaveTextContent('Photo Showcase')
+        // TODO: is there a way to not need waitFor here? currently used to avoid "An update to PhotoShowcase inside a test was not wrapped in act" error due to PhotoShowcase updating with albums response
+        await waitFor(() => {
+            expect(screen.getByRole('heading', {name: 'Photo Showcase'})).toHaveTextContent('Photo Showcase')
+        })
     })
 
     describe('Albums', () => {
-        test('PhotoShowcase displays Album heading text', () => {
+        test('PhotoShowcase displays Album heading text', async () => {
             render(<PhotoShowcase/>)
     
-            expect(screen.getByRole('heading', {name: 'Albums'})).toHaveTextContent('Albums')
+            await waitFor(() => {
+                expect(screen.getByRole('heading', {name: 'Albums'})).toHaveTextContent('Albums')
+            })
         })
     
         test('PhotoShowcase displays Album title for each retrieved album', async () => {
             render(<PhotoShowcase/>)
-            
+
             expect(await screen.findByRole('heading', {name: 'Album 1'})).toHaveTextContent('Album 1')
             expect(await screen.findByRole('heading', {name: 'Album 2'})).toHaveTextContent('Album 2')
             expect(await screen.findByRole('heading', {name: 'Album 3'})).toHaveTextContent('Album 3')
