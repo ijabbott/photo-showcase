@@ -12,7 +12,7 @@ const AlbumDisplay = ({albumTitle, photos, albumId}: AlbumDisplayProps) => {
 
     return (
         <div data-testid={`album-${albumId}`}>
-            <h4>{albumTitle}</h4>
+            <h4 className='album-header'>{albumTitle}</h4>
             <div className='album-wrapper'>
                 {photos.map(photo => 
                     <PhotoDisplay key={photo.photoId} title={photo.title} url={photo.url}/>

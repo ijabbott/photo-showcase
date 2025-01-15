@@ -17,7 +17,6 @@ const PhotoDisplay = ({url, title}: PhotoProps) => {
                 <div className='photo-display'>
                     <div className='image-background'>
                         <img className='image' alt={title} src={url} loading="lazy"/>
-                        
                     </div>
                     <h4 className='photo-title'>{title}</h4>
                 </div>

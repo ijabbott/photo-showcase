@@ -25,14 +25,6 @@ describe('PhotoShowcase', () => {
     })
 
     describe('Albums', () => {
-        test('PhotoShowcase displays Album heading text', async () => {
-            render(<PhotoShowcase/>)
-    
-            await waitFor(() => {
-                expect(screen.getByRole('heading', {name: 'Albums'})).toHaveTextContent('Albums')
-            })
-        })
-    
         test('PhotoShowcase displays Album title for each retrieved album', async () => {
             render(<PhotoShowcase/>)
 

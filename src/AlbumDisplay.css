@@ -4,3 +4,7 @@
     white-space: nowrap;
     gap: 50px;
 }
+
+.album-header {
+    width: fit-content;
+}
