@@ -15,31 +15,45 @@ export type Album = {
   photos: Photo[]
 }
 
-function PhotoShowcase() {
-  const albums = useAlbums()
-  const [searchText, setSearchText] = useState('');
-  
-  const filterAlbums = (filterText: string) => {
-    const photos = albums.flatMap(album => album.photos)
-    const filteredPhotoIds = photos
-      .filter(photo => !photo.title.toLowerCase().includes(filterText))
-      .map(photo => photo.photoId)
+const PhotoShowcase = () => {
+  const albums:Album[] = useAlbums()
+  const photos:Photo[] = albums.flatMap(album => album.photos)
 
-    return filteredPhotoIds
+  const [searchText, setSearchText] = useState<string>('');
+  const [filteredPhotoIds, setFilteredPhotoIds] = useState<number[]>([])
+
+  const onSearchChange = (searchInput: string) => {
+    setSearchText(searchInput)
+
+    setFilteredPhotoIds(photos
+      .filter(photo => !photo.title.toLowerCase().includes(searchInput))
+      .map(photo => photo.photoId)
+    )
   }
+
+  const getHelperText = ():string => {
+    return (albums.length > 0 && filteredPhotoIds.length === photos.length) ? 'No photos matching search criteria' : ''
+  }
+
 
   return (
     <div className='photo-showcase'>
       <div className='header'>
         <h1>Photo Showcase</h1>
         <label>
-          Image Search: <input value={searchText} onChange={e => setSearchText(e.target.value)}/>
+          Image Search: <input value={searchText} onChange={e => onSearchChange(e.target.value)}/>
         </label>
+        <div>{getHelperText()}</div>
       </div>
       
       <div className='albums'>
         {albums.map(album => 
-          <AlbumDisplay key={album.albumId} albumTitle={`Album ${album.albumId}`} photos={album.photos} albumId={album.albumId} filteredPhotoIds={filterAlbums(searchText)}/>
+          <AlbumDisplay 
+            key={album.albumId}
+            albumTitle={`Album ${album.albumId}`}
+            photos={album.photos} albumId={album.albumId}
+            filteredPhotoIds={filteredPhotoIds}
+          />
         )}
       </div>
     </div>

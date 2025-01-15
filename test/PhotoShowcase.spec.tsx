@@ -70,7 +70,7 @@ describe('PhotoShowcase', () => {
             })
         })
 
-        test('PhotoShowcase no albums when nothing matches search criteria', async () => {
+        test('PhotoShowcase no albums and helper textwhen nothing matches search criteria', async () => {
             render(<PhotoShowcase/>)
 
             await waitFor(() => {
@@ -85,6 +85,7 @@ describe('PhotoShowcase', () => {
             await waitFor(() => {
                 expect(screen.getByText('Album 1')).not.toBeVisible()
                 expect(screen.getByText('Album 4')).not.toBeVisible()
+                expect(screen.getByText('No photos matching search criteria')).toBeInTheDocument()
             })
         })
     })
