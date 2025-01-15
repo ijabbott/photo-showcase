@@ -42,22 +42,21 @@ describe('PhotoShowcase', () => {
             expect(await screen.findByRole('heading', {name: 'Album 4'})).toHaveTextContent('Album 4')
         })
 
-        // test('PhotoShowcase displays Photo Titles under each Album Title', async () => {
-        //     render(<PhotoShowcase/>)
+        test('PhotoShowcase displays photos under each album', async () => {
+            render(<PhotoShowcase/>)
 
-        //     const album1Element = await screen.findByRole('heading', {name: 'Album 1'})
-        //     const album4Element = await screen.findByRole('heading', {name: 'Album 4'})
+            const album1Element = await screen.findByTestId('album-1')
+            const album4Element = await screen.findByTestId('album-4')
 
+            const photo5 = within(album1Element).getByAltText('Photo5Album1')
+            const photo6 = within(album4Element).getByAltText('Photo6Album4')
+            const photo7 = within(album4Element).getByAltText('Photo7Album4')
+            const photo8 = within(album4Element).getByAltText('Photo8Album4')
 
-        //     const photo5 = within(album1Element).getByRole('heading', {name: 'Photo5Album1'})
-        //     const photo6 = within(album4Element).getByRole('heading', {name: 'Photo6Album4'})
-        //     const photo7 = within(album4Element).getByRole('heading', {name: 'Photo7Album4'})
-        //     const photo8 = within(album4Element).getByRole('heading', {name: 'Photo8Album4'})
-
-        //     expect(photo5).toHaveTextContent('Photo5Album1')
-        //     expect(photo6).toHaveTextContent('Photo6Album4')
-        //     expect(photo7).toHaveTextContent('Photo7Album4')
-        //     expect(photo8).toHaveTextContent('Photo8Album4')
-        // })
+            expect(photo5).toBeInTheDocument()
+            expect(photo6).toBeInTheDocument()
+            expect(photo7).toBeInTheDocument()
+            expect(photo8).toBeInTheDocument()
+        })
     })
 })

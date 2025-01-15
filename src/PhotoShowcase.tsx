@@ -1,3 +1,4 @@
+import AlbumDisplay from './AlbumDisplay'
 import PhotoDisplay from './PhotoDisplay'
 import './PhotoShowcase.css'
 import useAlbums from './useAlbums'
@@ -19,18 +20,12 @@ function PhotoShowcase() {
 
   return (
     <>
-      <PhotoDisplay title='Test Photo Title' url='https://showcase.leantechniques.com/image/welcome.jpg'/>
+      {/* <PhotoDisplay title='Test Photo Title' url='https://showcase.leantechniques.com/image/welcome.jpg'/>
+      <AlbumDisplay albumTitle='Album 1' photos={albums.at(1)?.photos || []}/> */}
       <h1>Photo Showcase</h1>
       <h2>Albums</h2>
       {albums.map(album => 
-        <h3 key={album.albumId}>
-          {`Album ${album.albumId}`}
-          {/* {album.photos.map(photo => 
-            <h4>
-              {`${photo.title}`}
-            </h4>
-          )} */}
-        </h3>
+        <AlbumDisplay albumTitle={`Album ${album.albumId}`} photos={album.photos} albumId={album.albumId} />
       )}
     </>
   )
