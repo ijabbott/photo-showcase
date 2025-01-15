@@ -1,10 +1,14 @@
-.album-wrapper {
+.album-photos {
     display: flex;
     overflow: auto;
     white-space: nowrap;
-    gap: 50px;
+    gap: 2rem;
 }
 
 .album-header {
-    width: fit-content;
+    display: flex
+}
+
+.album-wrapper {
+    max-width: 96rem;
 }
