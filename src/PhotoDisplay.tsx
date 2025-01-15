@@ -1,3 +1,4 @@
+import { PhotoProvider, PhotoView } from 'react-photo-view'
 import './PhotoDisplay.css'
 
 type PhotoProps = {
@@ -5,13 +6,23 @@ type PhotoProps = {
     title: string
 }
 
-const PhotoDisplay = ({ url, title}: PhotoProps) => {
-
+const PhotoDisplay = ({url, title}: PhotoProps) => {
     return (
-        <div className='photo-display'>
-            <img alt={title} src={url} width="300" height="200"/>
-            <h4 className='photo-title'>{title}</h4>
-        </div>
+        <PhotoProvider overlayRender={() => {
+            return <div className='photo-overlay' data-testid={`photo-overlay`}>
+                    <div>{title}</div>
+                </div>
+        }}>
+            <PhotoView src={url}>
+                <div className='photo-display'>
+                    <div className='image-background'>
+                        <img className='image' alt={title} src={url} loading="lazy"/>
+                        
+                    </div>
+                    <h4 className='photo-title'>{title}</h4>
+                </div>
+            </PhotoView>
+        </PhotoProvider>
     )
 }
 

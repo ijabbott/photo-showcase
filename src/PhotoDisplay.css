@@ -1,9 +1,30 @@
 .photo-display {
-    
+    width: 12rem;
 }
 
 .photo-title {
     max-width: 300px;
     overflow-wrap: break-word;
     white-space: normal;
+}
+
+.photo-overlay {
+    position: absolute; 
+    bottom: 0; 
+    left: 0; 
+    z-index: 10; 
+    padding: 1rem;
+}
+
+.image {
+    object-fit: cover; 
+    width: auto; 
+    height: 8rem; 
+    cursor: pointer; 
+}
+
+.image-background {
+    background-color: black;
+    width: 12rem;
+    height: 8rem;
 }
