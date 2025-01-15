@@ -1,3 +1,4 @@
+import PhotoDisplay from './PhotoDisplay'
 import './PhotoShowcase.css'
 import useAlbums from './useAlbums'
 
@@ -18,6 +19,7 @@ function PhotoShowcase() {
 
   return (
     <>
+      <PhotoDisplay title='Test Photo Title' url='https://showcase.leantechniques.com/image/welcome.jpg'/>
       <h1>Photo Showcase</h1>
       <h2>Albums</h2>
       {albums.map(album => 
