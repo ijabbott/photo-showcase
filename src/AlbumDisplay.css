@@ -1,4 +1,4 @@
-.photo-wrapper {
+.album-wrapper {
     display: flex;
     overflow: auto;
     white-space: nowrap;

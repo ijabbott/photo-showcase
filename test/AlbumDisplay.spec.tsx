@@ -2,8 +2,6 @@ import {render, screen} from '@testing-library/react'
 import {describe, test, expect} from 'vitest'
 import AlbumDisplay from '../src/AlbumDisplay'
 
-
-
 describe('AlbumDisplay', () => {
     test('AlbumDisplay displays album title', () => {
         const albumTitle = 'Album 1'
