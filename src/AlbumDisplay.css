@@ -1,0 +1,6 @@
+.photo-wrapper {
+    display: flex;
+    overflow: auto;
+    white-space: nowrap;
+    gap: 50px;
+}
