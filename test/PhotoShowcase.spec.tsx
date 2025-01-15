@@ -4,6 +4,7 @@ import {describe, test, expect} from 'vitest'
 import {http, HttpResponse} from 'msw'
 import {setupServer} from 'msw/node'
 import { mockSuccessfulResponse } from './mocks/mockApiResponses'
+import userEvent from '@testing-library/user-event'
 
 const server = setupServer(
     http.get('photoApi/albums', () => {
@@ -49,6 +50,42 @@ describe('PhotoShowcase', () => {
             expect(photo6).toBeInTheDocument()
             expect(photo7).toBeInTheDocument()
             expect(photo8).toBeInTheDocument()
+        })
+
+        test('PhotoShowcase displays only photos that match search criteria (case-insensitive)', async () => {
+            render(<PhotoShowcase/>)
+
+            const album1Element = await screen.findByTestId('album-1')
+            const album4Element = await screen.findByTestId('album-4')
+
+            const searchBar = screen.getByRole("textbox", { name: "Image Search:"})
+
+            userEvent.type(searchBar, 'album1')
+
+            await waitFor(() => {
+                expect(within(album1Element).getByAltText('Photo5Album1')).toBeVisible()
+                expect(within(album4Element).getByAltText('Photo6Album4')).not.toBeVisible()
+                expect(within(album4Element).getByAltText('Photo7Album4')).not.toBeVisible()
+                expect(within(album4Element).getByAltText('Photo8Album4')).not.toBeVisible()
+            })
+        })
+
+        test('PhotoShowcase no albums when nothing matches search criteria', async () => {
+            render(<PhotoShowcase/>)
+
+            await waitFor(() => {
+                expect(screen.getByText('Album 1')).toBeVisible()
+                expect(screen.getByText('Album 4')).toBeVisible()
+            })
+
+            const searchBar = screen.getByRole("textbox", { name: "Image Search:"})
+
+            userEvent.type(searchBar, 'notARealTitle')
+
+            await waitFor(() => {
+                expect(screen.getByText('Album 1')).not.toBeVisible()
+                expect(screen.getByText('Album 4')).not.toBeVisible()
+            })
         })
     })
 })

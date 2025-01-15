@@ -3,10 +3,11 @@ import './PhotoDisplay.css'
 
 type PhotoProps = {
     url: string,
-    title: string
+    title: string,
+    hidden?: boolean
 }
 
-const PhotoDisplay = ({url, title}: PhotoProps) => {
+const PhotoDisplay = ({url, title, hidden}: PhotoProps) => {
     return (
         <PhotoProvider overlayRender={() => {
             return <div className='photo-overlay' data-testid={`photo-overlay`}>
@@ -14,7 +15,7 @@ const PhotoDisplay = ({url, title}: PhotoProps) => {
                 </div>
         }}>
             <PhotoView src={url}>
-                <div className='photo-display'>
+                <div className='photo-display' hidden={hidden}>
                     <div className='image-background'>
                         <img className='image' alt={title} src={url} loading="lazy"/>
                     </div>
