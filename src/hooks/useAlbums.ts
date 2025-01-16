@@ -6,10 +6,11 @@ const useAlbums = (): Album[] => {
 
       const API_KEY_HEADER =  import.meta.env.VITE_API_KEY_HEADER
       const API_KEY_VALUE = import.meta.env.VITE_API_KEY_VALUE
+      const API_ROUTE = import.meta.env.VITE_ALBUMS_ROUTE
 
       useEffect(() => {
         const fetchAlbums = async () => {
-            await fetch("photoApi/albums", {
+            await fetch(`photoApi/${API_ROUTE}`, {
                 headers: {
                     [API_KEY_HEADER]: API_KEY_VALUE
                 }
