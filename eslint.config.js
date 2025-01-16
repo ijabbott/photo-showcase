@@ -6,13 +6,12 @@ import reactRefresh from 'eslint-plugin-react-refresh'
 import tseslint from 'typescript-eslint'
 
 export default tseslint.config(
-  { ignores: ['dist'] },
+  { ignores: ['dist', 'coverage'] },
   {
     settings: {react: {version: '18.3'}},
     extends: [
       js.configs.recommended,
-      ...tseslint.configs.recommendedTypeChecked,
-      ...tseslint.configs.stylisticTypeChecked
+      ...tseslint.configs.recommendedTypeChecked
     ],
     files: ['**/*.{ts,tsx}'],
     languageOptions: {

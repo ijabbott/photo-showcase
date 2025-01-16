@@ -4,7 +4,7 @@ import {describe, test, expect} from 'vitest'
 import PhotoDisplay from '../src/PhotoDisplay'
 
 describe('PhotoDisplay', () => {
-    test('PhotoDisplay displays photo with title', async () => {
+    test('PhotoDisplay displays photo with title', () => {
         const photo = {"photoId": 1, "url": "https://testPhotoUrl/testPhoto.jpg", "albumId": 1, "title": "testTitle"}
 
         render(<PhotoDisplay photos={[photo]} filteredPhotoIds={[]}/>)
@@ -24,7 +24,7 @@ describe('PhotoDisplay', () => {
 
         const image = screen.getByAltText("testTitle")
 
-        userEvent.click(image)
+        await userEvent.click(image)
 
         await waitFor(() => {
             const overlay = screen.getByTestId('photo-overlay')

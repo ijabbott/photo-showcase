@@ -60,7 +60,7 @@ describe('PhotoShowcase', () => {
 
             const searchBar = screen.getByRole("textbox", { name: "Image Search:"})
 
-            userEvent.type(searchBar, 'album1')
+            await userEvent.type(searchBar, 'album1')
 
             await waitFor(() => {
                 expect(within(album1Element).getByAltText('Photo5Album1')).toBeVisible()
@@ -81,7 +81,7 @@ describe('PhotoShowcase', () => {
 
             const searchBar = screen.getByRole("textbox", { name: "Image Search:"})
 
-            userEvent.type(searchBar, 'notARealTitle')
+            await userEvent.type(searchBar, 'notARealTitle')
 
             await waitFor(() => {
                 expect(screen.getByText('Album 1')).not.toBeVisible()
