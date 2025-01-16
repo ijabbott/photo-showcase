@@ -1,27 +1,26 @@
 import { PhotoProvider, PhotoView } from 'react-photo-view'
 import './PhotoDisplay.css'
+import { Photo } from './PhotoShowcase'
+import PhotoOverlay from './PhotoOverlay'
 
 type PhotoProps = {
-    url: string,
-    title: string,
-    hidden?: boolean
+    photos: Photo[],
+    filteredPhotoIds: number[]
 }
 
-const PhotoDisplay = ({url, title, hidden}: PhotoProps) => {
+const PhotoDisplay = ({photos, filteredPhotoIds}: PhotoProps) => {
     return (
-        <PhotoProvider overlayRender={() => {
-            return <div className='photo-overlay' data-testid={`photo-overlay`}>
-                    <div>{title}</div>
-                </div>
-        }}>
-            <PhotoView src={url}>
-                <div className='photo-display' hidden={hidden}>
-                    <div className='image-background'>
-                        <img className='image' alt={title} src={url} loading="lazy"/>
+        <PhotoProvider overlayRender={({overlay}) => overlay}>
+            {photos.map(photo => 
+                <PhotoView key={photo.photoId} src={photo.url} overlay={<PhotoOverlay photoTitle={photo.title}/>}>
+                    <div className='photo-display' hidden={filteredPhotoIds.includes(photo.photoId)}>
+                        <div className='image-background'>
+                            <img className='image' alt={photo.title} src={photo.url} loading="lazy"/>
+                        </div>
+                        <h4 className='photo-title'>{photo.title}</h4>
                     </div>
-                    <h4 className='photo-title'>{title}</h4>
-                </div>
-            </PhotoView>
+                </PhotoView>
+            )}
         </PhotoProvider>
     )
 }

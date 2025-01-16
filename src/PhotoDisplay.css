@@ -8,14 +8,6 @@
     white-space: normal;
 }
 
-.photo-overlay {
-    position: absolute; 
-    bottom: 0; 
-    left: 0; 
-    z-index: 10; 
-    padding: 1rem;
-}
-
 .image {
     object-fit: cover; 
     width: auto; 

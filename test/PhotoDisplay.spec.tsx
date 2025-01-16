@@ -7,7 +7,7 @@ describe('PhotoDisplay', () => {
     test('PhotoDisplay displays photo with title', async () => {
         const photo = {"photoId": 1, "url": "https://testPhotoUrl/testPhoto.jpg", "albumId": 1, "title": "testTitle"}
 
-        render(<PhotoDisplay title={photo.title} url={photo.url}/>)
+        render(<PhotoDisplay photos={[photo]} filteredPhotoIds={[]}/>)
 
         const image = screen.getByAltText("testTitle")
 
@@ -20,7 +20,7 @@ describe('PhotoDisplay', () => {
     test('PhotoDisplay displays overlay when clicked', async () => {
         const photo = {"photoId": 1, "url": "https://testPhotoUrl/testPhoto.jpg", "albumId": 1, "title": "testTitle"}
 
-        render(<PhotoDisplay title={photo.title} url={photo.url}/>)
+        render(<PhotoDisplay photos={[photo]} filteredPhotoIds={[]}/>)
 
         const image = screen.getByAltText("testTitle")
 
@@ -29,6 +29,8 @@ describe('PhotoDisplay', () => {
         await waitFor(() => {
             const overlay = screen.getByTestId('photo-overlay')
             expect(within(overlay).getByText(photo.title)).toHaveTextContent(photo.title)
+            expect(image).toBeInTheDocument()
+            expect(image).toHaveAttribute('src', photo.url)
         })
     })
 })

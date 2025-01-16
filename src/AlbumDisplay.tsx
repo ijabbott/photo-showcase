@@ -23,9 +23,7 @@ const AlbumDisplay = ({albumTitle, photos, albumId, filteredPhotoIds}: AlbumDisp
         <div className='album-wrapper' data-testid={`album-${albumId}`} hidden={hideAlbum(photos, filteredPhotoIds)}>
             <h2 className='album-header'>{albumTitle}</h2>
             <div className='album-photos'>
-                {photos.map(photo => 
-                    <PhotoDisplay key={photo.photoId} title={photo.title} url={photo.url} hidden={filteredPhotoIds.includes(photo.photoId)}/>
-                )}
+                <PhotoDisplay photos={photos} filteredPhotoIds={filteredPhotoIds}/>
             </div>
         </div>
     )
