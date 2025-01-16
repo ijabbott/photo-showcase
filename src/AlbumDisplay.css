@@ -3,16 +3,17 @@
     overflow: auto;
     white-space: nowrap;
     gap: 2rem;
-    margin-left: 1rem;
+    padding-left: 1rem;
 }
 
 .album-header {
     display: flex;
-    padding: 1rem;
+    padding-left: 1rem;
 }
 
 .album-wrapper {
+    width: 100%;
     max-width: 96rem;
-    margin: 4rem 0;
+    margin: 2rem 0;
     background-color: #393636;
 }

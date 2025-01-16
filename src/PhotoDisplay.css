@@ -3,7 +3,6 @@
 }
 
 .photo-title {
-    max-width: 300px;
     overflow-wrap: break-word;
     white-space: normal;
 }
