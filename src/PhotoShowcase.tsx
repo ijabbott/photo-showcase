@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import AlbumDisplay from './AlbumDisplay'
 import './PhotoShowcase.css'
-import useAlbums from './useAlbums'
+import useAlbums from './hooks/useAlbums'
 
 export type Photo = {
   photoId: number,

@@ -1,5 +1,5 @@
 import { renderHook, waitFor } from '@testing-library/react'
-import useAlbums from '../src/useAlbums'
+import useAlbums from '../src/hooks/useAlbums'
 import { setupServer } from 'msw/node'
 import { http, HttpResponse } from 'msw'
 import {describe, test, expect} from 'vitest'
