@@ -6,7 +6,7 @@ Photos can be filtered with the search bar, and albums can be flipped through by
 
 ## Building and Running the Application
 
-To build the application, run the following command:
+To install dependencies for the application, run the following command:
 
 ```
 npm install
